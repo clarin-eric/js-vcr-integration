@@ -3,6 +3,7 @@
 Widget and API for easy integration with the [Virtual Collection Registry](https://collections.clarin.eu) (VCR)
 
 ![Build and test workflow](https://github.com/clarin-eric/js-vcr-integration/actions/workflows/webpack.yml/badge.svg?branch=main)
+![Release](https://github.com/clarin-eric/js-vcr-integration/actions/workflows/release.yml/badge.svg?branch=main)
 ![Documentation](https://github.com/clarin-eric/js-vcr-integration/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)
 
 ## Main features
@@ -54,31 +55,76 @@ by assigning it to `window.vcrIntegrationConfiguration`:
 </script>
 ```
 
-The follow properties are supported:
+Configuration options can also be set at runtime via the `setConfiguration` method. For instance:
+```js
+window.vcrIntegration.setConfiguration({
+  'maxItemCount': 2
+}, true);
+```
+
+The boolean option at the end causes a merge, rather than an override of the full configuration object. Note that configuration changes are not automatically applied; re-rendering may be needed, and some options are only applied upon initalisation.
+
+### Supported configuration options
+
+See also [Configuration.js](./src/Configuration.js).
+
+#### Integration with VCR service:
+* `endpointUrl`: Base URL of the Virtual Collection endpoint.
+  * Defaults to `https://collections.clarin.eu/submit/extensional`.
+* `maxItemCount`: The maximum number of items to allow in the queue.
+  * Defaults to `100`.
+* `defaultName`: Default name for a new collection.
+  * Leave unconfigured for not passing any collection name.
+
+#### Behaviour:
 * `logLevel`: Log level for console output 
-  * Value must be one of `debug`, `info`, `warn` or `silent`; see [loglevel](https://github.com/pimterry/loglevel)
-  * Defaults to `info`
-* `autoInitialize`: Set to `false` to disable automatic initialisation of the plugin
-  * Doing this renders the plugin inactive until programatically activated with a call to `window.initVcrIntegration()` 
+  * Value must be one of `debug`, `info`, `warn` or `silent`; see [loglevel](https://github.com/pimterry/loglevel).
+  * Defaults to `info`.
+* `autoInitialize`: Set to `false` to disable automatic initialisation of the plugin.
+  * Doing this renders the plugin inactive until programatically activated with a call to `window.initVcrIntegration()`.
   * Defaults to `true`
-* `endpointUrl`: Base URL of the Virtual Collection endpoint 
-  * Defaults to `https://collections.clarin.eu/submit/extensional`
-* `queueControlPosition`: Position for rendering the queue component 
-  * One of `top-right`, `bottom-right`, `bottom-left` or `top-left`
-  * Defaults to `bottom-right`
-* `defaultName`: Default name for a new collection
-  * Leave unconfigured for no default name
-* `icons`: Can be used to pass an array that defines markup for icons to replace the default icons. See `Icons.js`
+* `autoDisableAddedItemLinks`: If set to true, links/buttons with the VCR data attributes will automatically be enabled or disabled upon changes in the queue, reflecting the presence of the referenced item in it.
+  * Defaults to `true`.
+
+#### Appearance and customisation:
+* `queueControlPosition`: Position for rendering the queue component.
+  * One of `top-right`, `bottom-right`, `bottom-left` or `top-left`.
+  * Defaults to `bottom-right`.
+* `icons`: Can be used to pass an array that defines markup for icons to replace the default icons. See `Icons.js`.
 for a list of properties.
-* `autoDisableAddedItemLinks`: ..
-* `customQueueComponentClass`: ..
+  * Leave unconfigured to use the default icon markup.
+* `customQueueComponentClass`: Name for a class that is added to the queue component's root element for customisation purposes.
+  * Leave unconfigured for no additional custom class.
 
 ## Customisation
 
 ### CSS
 
-`*TODO*`
+CSS can be used to override default style including colours, fonts, sizes, margins etc. A container element with class `.vcr-plugin` is rendered. Within this, there may be an element with id `#queue-component`. If the configuration option `customQueueComponentClass` is set (see above) the specified class is added to this element. Using this, one can override any properties. For instance, assuming `{customQueueComponentClass: 'my-customisation'}`:
+
+```css
+.vcr-plugin #queue-component.my-customisation {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: purple;
+}
+
+.vcr-plugin #queue-component.my-customisation ul.queue-items {
+  list-style-type: '🎉';
+}
+```
 
 ### Icons
 
-`*TODO*`
+Custom icons can be configured via the `icons` configuration option (see above). For example:
+```js
+window.vcrIntegration.setConfiguration({
+  'icons': {
+    'hide': '[H]',
+    'show': '[S]',
+    'remove': '[X]',
+    'itemUrlLink': '[i]',
+    'help': '[?]'
+    }
+  }, true);
+```
+Keep in mind that any icons NOT included in the override will not be rendered at all! For a full list of keys, see [Icons.js](src/Icons.js).
