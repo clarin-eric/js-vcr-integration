@@ -36,6 +36,28 @@ Other resource
 That is it. If a user clicks one of the annotated links a queue component will appear, allowing the user to manage the
 queue (i.e. remove items or clear the entire queue) and eventually submit the queue to the Virtual Collection Registry.
 
+See the [example page](./example.html) for a full integration example.
+
+### Requirements
+
+The current version of the library assumes the availability of a number of CSS style definitions from
+[Bootstrap 3.x](https://getbootstrap.com/docs/3.4/). 
+
+If these definitions are not available, this will affect the behaviour and appearance of the controls provided by the library. 
+It is therefore recommended to include the following if your page, site or application doesn't already use this version of
+Bootstrap:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+```
+
+Alternatively, to avoid clashes with further styling, you may also use a tool such SASS or LESS to import the bootstrap classes
+within the context of the `.vcr-plugin` class (see section on customisation below).
+
+For more information, see the [Bootstrap 3.4 documentation](https://getbootstrap.com/docs/3.4/getting-started/).
+
+There are no external Javascript dependencies.
+
 ### Programmatic control
 
 After initalisation, a control object becomes available as `window.vcrIntegration`. It exposes an API that is

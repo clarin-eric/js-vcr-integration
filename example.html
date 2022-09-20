@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Collection Registry integratin example</title>
+
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- VCR integration script-->
+    <script src="./dist/vcr-integration.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h1>VCR integration test</h1>
+            <h2>Resources</h2>
+
+            <div class="well">
+                <h3>Some resource</h3>
+                <pre>http://doi.org/10.5555/12345678</pre>
+                <a class="btn btn-default" data-vcr-uri="http://doi.org/10.5555/12345678"
+                    data-vcr-label="Some resource">
+                    Add to virtual collection
+                </a>
+            </div>
+
+            <div class="well">
+                <h3>Other resource</h3>
+                <pre>https://tinyurl.com/my-resource</pre>
+                <a class="btn btn-default" data-vcr-uri="https://tinyurl.com/my-resource"
+                    data-vcr-label="Some other resource" data-vcr-description="Optional description for the resource">
+                    Add to virtual collection
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
