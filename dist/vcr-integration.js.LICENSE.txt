@@ -10,7 +10,7 @@
  */
 
 /*!
- * Virtual Collection Registry integration plugin v1.0.0
+ * Virtual Collection Registry integration plugin v1.1.0-dev
  *  Licensed GPLv3. CLARIN ERIC - https://www.clarin.eu
  */
 
