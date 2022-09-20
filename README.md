@@ -36,7 +36,7 @@ Other resource
 That is it. If a user clicks one of the annotated links a queue component will appear, allowing the user to manage the
 queue (i.e. remove items or clear the entire queue) and eventually submit the queue to the Virtual Collection Registry.
 
-See the [example page](./dist/example.html) for a full integration example.
+See the [example page](./dist/example.html) for a full integration example ([rendered version](https://htmlpreview.github.io/?https://github.com/clarin-eric/js-vcr-integration/blob/main/dist/example.html)).
 
 ### Requirements
 
